@@ -1,9 +1,7 @@
 package kg.itschool.crmspring.models.entity;
 
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
@@ -25,5 +23,11 @@ public class Student extends BaseEntity{
     @Column(name = "dob" , nullable = false )
     LocalDate dob;
 
+
+
+    @ManyToOne
+    @JoinColumn(name = "group_id")
     Group group;
+
+
 }
