@@ -20,11 +20,8 @@ public abstract class BaseEntity {
     @Column(name = "id", insertable = false, updatable = false)
     Long id;
 
-    @Column(name = "date_created" , nullable = false , updatable = false , columnDefinition = "TIMESTAMP DEFAULT NOW()")
-    LocalDateTime dateCreated;
 
 
-    @Column(name = "date_update" )
-    LocalDate dateUpdate;
+
 
 }

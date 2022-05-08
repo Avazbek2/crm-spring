@@ -1,27 +1,31 @@
 package kg.itschool.crmspring.models.entity;
 
 
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 
-@Data
+@Setter
+@Getter
+@ToString
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
-@Table(name = "course_format")
-public class CourseFormat extends BaseEntity{
+@Table(name = "tb_course_format")
+public class CourseFormat{
 
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", insertable = false, updatable = false)
+    Long id;
 
 
 
@@ -29,14 +33,17 @@ public class CourseFormat extends BaseEntity{
     String format;
 
     @Column(name = "course_duration_weeks" , nullable = false)
-    int courseDurationWeeks;
+    Integer courseDurationWeeks;
 
     @Column(name = "lesson_duration" , nullable = false )
     LocalTime lessonDuration;
 
     @Column(name = "lessons_per_week" , nullable = false)
-    int lessonsPerWeek;
+    Integer lessonsPerWeek;
 
     @Column(name = "is_online" ,  nullable = false)
-    boolean isOnline;
+    Boolean isOnline;
+
+    @Column(name =  "is_Active" , nullable = false)
+    Boolean isActive;
 }

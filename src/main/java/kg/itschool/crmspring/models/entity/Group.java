@@ -1,8 +1,8 @@
 package kg.itschool.crmspring.models.entity;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
+import lombok.experimental.FieldDefaults;
+import org.hibernate.annotations.Fetch;
 
 import javax.persistence.*;
 import java.time.LocalTime;
@@ -10,9 +10,18 @@ import java.time.LocalTime;
 @Setter
 @Getter
 @ToString
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 @Entity
-@Table(name = "group")
-public class Group extends BaseEntity{
+@Table(name = "tb_group")
+@FieldDefaults(level = AccessLevel.PRIVATE)
+public class Group {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", insertable = false, updatable = false)
+    Long id;
 
     @Column(name = "name" , nullable = false , length = 50)
     String name;
@@ -21,12 +30,17 @@ public class Group extends BaseEntity{
     LocalTime groupTime;
 
 
-    @ManyToOne
-    @JoinColumn(name = "course_id")
+    @ToString.Exclude
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "course_id" , referencedColumnName = "id")
     Course course;
 
 
-    @ManyToOne
-    @JoinColumn(name = "mentor_id")
+    @ToString.Exclude
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "mentor_id" , referencedColumnName = "id")
     Mentor mentor;
+
+    @Column(name =  "is_Active" , nullable = false)
+    Boolean isActive;
 }

@@ -7,24 +7,35 @@ import lombok.experimental.FieldDefaults;
 
 import javax.persistence.*;
 
-@Data
+@Setter
+@Getter
+@ToString
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 @Entity
-@Table(name = "course")
+@Table(name = "tb_course")
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class Course extends BaseEntity {
+public class Course  {
 
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", insertable = false, updatable = false)
+    Long id;
 
     @Column(name = "name" , nullable = false)
     String name;
 
     @Column(name = "price" , nullable = false)
-    double price;
+    Double price;
 
 
-    @ManyToOne
+    @ToString.Exclude
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "course_format_id")
     CourseFormat courseFormat;
+
+    @Column(name =  "is_Active" , nullable = false)
+    Boolean isActive;
 }

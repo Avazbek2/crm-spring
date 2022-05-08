@@ -1,22 +1,27 @@
 package kg.itschool.crmspring.models.entity;
 
 
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import lombok.experimental.FieldDefaults;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
+import javax.annotation.security.DenyAll;
+import javax.persistence.*;
 import java.time.LocalDate;
 
 @Setter
 @Getter
 @ToString
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 @Entity
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class Manager extends BaseEntity{
+@Table(name = "tb_manager")
+public class Manager {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", insertable = false, updatable = false)
+    Long id;
 
     @Column(name = "first_name" , nullable = false , length = 50)
     String firstName;
@@ -35,4 +40,7 @@ public class Manager extends BaseEntity{
 
     @Column(name = "salary" , nullable = false)
     Double salary;
+
+    @Column(name =  "is_Active" , nullable = false)
+    Boolean isActive;
 }
