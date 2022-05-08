@@ -11,7 +11,7 @@ public interface StudentService {
 
     StudentDto delete(StudentDto studentDto);
 
-    List<StudentDto> findStudentsByGroup(Long id);
+    List<StudentDto> findStudentsByGroupId(Long id);
 
     StudentDto findById(Long id);
 }

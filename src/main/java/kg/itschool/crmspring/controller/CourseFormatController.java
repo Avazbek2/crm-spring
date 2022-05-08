@@ -9,10 +9,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -32,4 +29,34 @@ public class CourseFormatController {
                  .body(courseFormatDto);
 
     }
+
+    @PostMapping("/delete")
+    public ResponseEntity delete(@RequestBody CourseFormatDto courseFormatDto){
+        CourseFormatDto deletedCourseFormatDto = courseFormatService.delete(courseFormatDto);
+
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(deletedCourseFormatDto);
+    }
+
+    @GetMapping("/find-by-id")
+    public ResponseEntity findById(@RequestParam Long id){
+
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(courseFormatService.findById(id));
+    }
+
+
+    @GetMapping("/get-all")
+    public ResponseEntity findAll(){
+
+
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(courseFormatService.findAll());
+    }
+
+
+
 }

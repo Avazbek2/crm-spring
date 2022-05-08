@@ -64,7 +64,7 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public List<StudentDto> findStudentsByGroup(Long id) {
+    public List<StudentDto> findStudentsByGroupId(Long id) {
 
         List<Student> students = studentRepository.findAllByGroup_Id(id);
 
